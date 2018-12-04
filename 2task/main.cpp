@@ -7,9 +7,11 @@ void test() {
 	CString s1 = "as";
 	s += 'a';
 	assert(s == "asa");
+	s += "b";
+	assert(s == "asab");
 	assert(s1 <= s);
 	assert(s1 < s);
-	assert(s == (s1 + "a"));
+	assert(s == (s1 + "ab"));
 	CString s2(CString("nasdb"));
 	CString s3;
 	CString s4 = "nasdb";
@@ -20,6 +22,8 @@ void test() {
 	assert(s3.empty() == true);
 	assert(s2 > s3);
 	assert(s2 > s1);
+	assert(s2 > "mas");
+	assert("oaasj" > s2);
 	assert(s2 >= s1);
 	assert(s1 != s);
 	s3 += s1 + s2;
@@ -47,6 +51,11 @@ void test() {
 	s3 = s2;
 	s3 = str1 + s3;
 	s3 += str2;
+
+	assert("nasdb" + s + ' ' <= "nasdbasab ");
+	assert("nasdb" + s + ' ' == "nasdbasab ");
+	assert("nasdb" + s + ' ' >= "nasdbasab ");
+
 	assert(str1 + s2 + str2 == s3);
 	s1[3] = '%';
 	assert(s1 == "nas%b");

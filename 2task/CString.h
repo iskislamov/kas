@@ -24,9 +24,24 @@ public:
 	friend bool operator>(const CString&, const CString&);
 	friend bool operator>=(const CString&, const CString&);
 
+	friend bool operator==(const CString&, const char*);
+	friend bool operator!=(const CString&, const char*);
+	friend bool operator<(const CString&, const char*);
+	friend bool operator<=(const CString&, const char*);
+	friend bool operator>(const CString&, const char*);
+	friend bool operator>=(const CString&, const char*);
+
+	friend bool operator==(const char*, const CString&);
+	friend bool operator!=(const char*, const CString&);
+	friend bool operator<(const char*, const CString&);
+	friend bool operator<=(const char*, const CString&);
+	friend bool operator>(const char*, const CString&);
+	friend bool operator>=(const char*, const CString&);
+
 
 	friend CString operator+(const CString&, const CString&);
 	CString& operator+=(const CString&);
+
 	
 	friend CString operator+(const CString&, const char&);
 	CString& operator+=(const char&);

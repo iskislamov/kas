@@ -11,7 +11,6 @@ CString::CString() {
 
 CString::CString(const char* str = "") {
 	size_ = strlen(str);
-
 	allocated_size_ = size_ + 1;
 	str_ = new char[allocated_size_];
 	
@@ -23,7 +22,6 @@ CString::CString(const char* str = "") {
 
 
 CString::CString(const CString& rhs) {
-std::cout <<"ASSIGNconstructor\n" << std::flush;
 	size_ = rhs.size_;
 	allocated_size_ = size_ + 1;
 	str_ = new char[allocated_size_];
@@ -35,7 +33,6 @@ std::cout <<"ASSIGNconstructor\n" << std::flush;
 }
 
 CString& CString::operator=(const CString& rhs) {
-std::cout << "ASSIGNoperator=\n" << std::flush;
 	if (this != &rhs) {
 		delete[] str_;
 		size_ = rhs.size_;
@@ -52,14 +49,12 @@ std::cout << "ASSIGNoperator=\n" << std::flush;
 
 
 CString::CString(CString&& rhs) {
-std::cout <<"MOVEconstructor\n" << std::flush;
 	std::swap(size_, rhs.size_);
 	std::swap(allocated_size_, rhs.allocated_size_);
 	std::swap(str_, rhs.str_);
 }
 
 CString& CString::operator=(CString&& rhs) {
-std::cout <<"MOVEoperator=\n" << std::flush;
 	if (this != &rhs) {
 		delete[] str_;
 
@@ -95,7 +90,7 @@ bool operator<(const CString& lhs, const CString& rhs) {
 }
 
 bool operator<=(const CString& lhs, const CString& rhs) {
-	return !(rhs < lhs);
+	return strcmp(lhs.str_, rhs.str_) <= 0;
 }
 
 bool operator>(const CString& lhs, const CString& rhs) {
@@ -103,18 +98,66 @@ bool operator>(const CString& lhs, const CString& rhs) {
 }
 
 bool operator>=(const CString& lhs, const CString& rhs) {
-	return !(lhs < rhs);
+	return strcmp(lhs.str_, rhs.str_) >= 0;
+}
+
+
+bool operator==(const CString& lhs, const char* str) {
+	return strcmp(lhs.str_, str) == 0;
+}
+
+bool operator!=(const CString& lhs, const char* str) {
+	return strcmp(lhs.str_, str) != 0;
+}
+
+bool operator<(const CString& lhs, const char* str) {
+	return strcmp(lhs.str_, str) < 0;
+}
+
+bool operator<=(const CString& lhs, const char* str) {
+	return strcmp(lhs.str_, str) <= 0;
+}
+	
+bool operator>(const CString& lhs, const char* str) {
+	return strcmp(lhs.str_, str) > 0;
+}
+
+bool operator>=(const CString& lhs, const char* str) {
+	return strcmp(lhs.str_, str) >= 0;
+}
+
+
+bool operator==(const char* str, const CString& rhs) {
+	return strcmp(str, rhs.str_) == 0;
+}
+
+bool operator!=(const char* str, const CString& rhs) {
+	return strcmp(str, rhs.str_) != 0;
+}
+
+bool operator<(const char* str, const CString& rhs) {
+	return strcmp(str, rhs.str_) < 0;
+}
+
+bool operator<=(const char* str, const CString& rhs) {
+	return strcmp(str, rhs.str_) <= 0;
+}
+
+bool operator>(const char* str, const CString& rhs) {
+	return strcmp(str, rhs.str_) > 0;
+}
+
+bool operator>=(const char* str, const CString& rhs) {
+	return strcmp(str, rhs.str_) >= 0;
 }
 
 
 CString operator+(const CString& lhs, const CString& rhs) {
 	CString ts = lhs;
-std::cout <<"operator+\n" << std::flush;
 	return ts += rhs;
 }
 
 CString& CString::operator+=(const CString& rhs) {
-std::cout <<"operator+=\n" << std::flush;
 	size_t new_size = size_ + rhs.size_;
 
 	if (new_size + 1 > allocated_size_) {
