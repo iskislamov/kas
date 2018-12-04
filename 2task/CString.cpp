@@ -1,3 +1,4 @@
+#include <cstring>
 #include "CString.h"
 
 
@@ -22,25 +23,27 @@ CString::CString(const char* str = "") {
 
 
 CString::CString(const CString& rhs) {
-	size_ = rhs.length();
+std::cout <<"ASSIGNconstructor\n" << std::flush;
+	size_ = rhs.size_;
 	allocated_size_ = size_ + 1;
 	str_ = new char[allocated_size_];
 	
 	for (size_t i = 0; i < size_; ++i) {
-		str_[i] = rhs[i];
+		str_[i] = rhs.str_[i];
 	}
 	str_[size_] = '\0';
 }
 
 CString& CString::operator=(const CString& rhs) {
+std::cout << "ASSIGNoperator=\n" << std::flush;
 	if (this != &rhs) {
 		delete[] str_;
-		size_ = rhs.length();
+		size_ = rhs.size_;
 		allocated_size_ = size_ + 1;
 		str_ = new char[allocated_size_];
 		
 		for (size_t i = 0; i < size_; ++i) {
-			str_[i] = rhs[i];
+			str_[i] = rhs.str_[i];
 		}
 		str_[size_] = '\0';
 	}
@@ -49,12 +52,14 @@ CString& CString::operator=(const CString& rhs) {
 
 
 CString::CString(CString&& rhs) {
+std::cout <<"MOVEconstructor\n" << std::flush;
 	std::swap(size_, rhs.size_);
 	std::swap(allocated_size_, rhs.allocated_size_);
 	std::swap(str_, rhs.str_);
 }
 
 CString& CString::operator=(CString&& rhs) {
+std::cout <<"MOVEoperator=\n" << std::flush;
 	if (this != &rhs) {
 		delete[] str_;
 
@@ -104,10 +109,12 @@ bool operator>=(const CString& lhs, const CString& rhs) {
 
 CString operator+(const CString& lhs, const CString& rhs) {
 	CString ts = lhs;
+std::cout <<"operator+\n" << std::flush;
 	return ts += rhs;
 }
 
 CString& CString::operator+=(const CString& rhs) {
+std::cout <<"operator+=\n" << std::flush;
 	size_t new_size = size_ + rhs.size_;
 
 	if (new_size + 1 > allocated_size_) {

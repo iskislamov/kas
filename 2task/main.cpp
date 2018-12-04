@@ -22,7 +22,6 @@ void test() {
 	assert(s2 > s1);
 	assert(s2 >= s1);
 	assert(s1 != s);
-
 	s3 += s1 + s2;
 	assert(s3 == "asnasdb");
 
@@ -32,6 +31,7 @@ void test() {
 	assert(s4 == "as");
 	assert(s1.length() == 5);
 	assert(s1 == "nasdb");
+
 
 	std::cout << "Write some string, please" << std::endl;
 	std::cin >> s5;
@@ -47,22 +47,17 @@ void test() {
 	s3 = s2;
 	s3 = str1 + s3;
 	s3 += str2;
-
 	assert(str1 + s2 + str2 == s3);
-
 	s1[3] = '%';
 	assert(s1 == "nas%b");
 	assert(s5[4] == '2');
 	s1[6] = '1';
 	assert(s1 == "nas%b");
 	assert(str1 < s3);
-
-
 }
 
 
 int main() {
 	test();
-	system("pause");
 	return 0;
 }
